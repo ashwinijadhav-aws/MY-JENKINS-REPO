@@ -1,0 +1,109 @@
+CICD:
+source
+build
+	CI
+deploy
+	CD
+
+CICD:
+	- AWS Managed: Codebuild ( buildspec.yml ) -> Codedeploy (appspec.yml) -> Codepipeline
+
+AWS CICD: Managed
+CodeCommit > CodeBuild > CodeDeploy > CodePipeline
+Github > CodeBuild > CodeDeploy > CodePipeline
+
+CodePipeline : Trigger
+	- CloudWatch -> Event Trigger ( CodeCommit master > event > CodePipeline )
+	- Poll SCM -> Pipeline will poll your CodeCommit provider for changes after specific ( 2 hours ) 
+
+CodeDeploy -> Webserver ( 
+	- dev-deployment-group
+	- prod-deployment-group
+
+Continuous Integration : CodeCommit > CodeBuild 
+Continous Deployment : CodeCommit > CodeBuild > CodeDeploy > CodePipeline
+
+CodeBuild Environment Variables:
+	- CodeBuild Built in ENV Values
+		- CODEBUILD_BUILD_NUMBER
+		- AWS_REGIONS
+		- CODEBUILD_SRC_DIR
+	- User Defined Env Values that you pass during the Build Execution.
+		- Runtime User defined variable.
+
+CodeBuild:
+	- CODEBUILD_BUILD_NUMBER
+		- 1
+		- 2
+CodeDeploy:
+	- Deployment ID
+		- d-45671232
+CodePipeline:
+	- Execution ID
+
+Execution of CodeBuild:
+	- Create a CB Project without source ( editor buildspec.yml )
+	- Create a CB Project with source ( integrate codecommit )
+
+Open Source CICD:
+Jenkins : Not Managed ( Installation , Configuration and Administration of Jenkins on a VM/EC2/Server)
+	- Build -> stages in pipeline
+	- Deploy -> Stages that will deploy artifacts.
+Managed CICD for Jenkins: Cloudbees -> Infra, OS -> Provider
+
+Jenkins:
+Github > Jenkins Pipeline Job ( build and deployment ) > Webserver ( deploy war file )
+Jenkins Jobs
+	- Job Run ID
+	- Build Number
+		- #1
+		- #2
+		- #3
+	
+1. Freestyle Job
+	- Change a Job Configuration in Jenkins UI
+2. Pipeline Job
+	- Write a Jenkinsfile( Jenkins Syntax ( Groovy ) ) - code will be Github.
+
+Jenkins Environment Variables:
+	- Jenkins Built in ENV Values
+		- BUILD_NUMBER
+	- User Defined Env Values that you pass during the Build Execution
+
+github ( ssh url , https url )
+	- ssh url -> public
+Github -> Jenkins 
+
+Jenkins <- Github
+git pull git@github.com:cloudmlops/jenkins-sample.git
+Jenkins -> client ( private key ) -> Jenkins Credentials
+Github Account -> server ( public key )
+	- Github Account
+	- Github Repository
+
+Local Machine -> Github
+git clone git@github.com:cloudmlops/jenkins-sample.git
+Local Machine -> client ( id_rsa ( private key ) )
+Github Account -> server ( id_rsa.pub public key )
+
+Jenkinsfile 
+- Pipeline 
+	- stages
+		- stage('build')
+			- steps { commands }
+			- steps { commands }
+		- stage('post-build')
+			- steps { commands }
+			- steps { commands }
+
+Jenkins :
+- Using Plugins ( Git, Maven, SSH )
+
+Jenkins : Trigger
+	- Webhook -> Change a code in Github > github will send event patter json to Jenkins > Jenkins will start automically
+	- Poll SCM -> Pipeline will poll your CodeCommit provider for changes after specific
+
+
+Jenkins: Github/CodeCommit
+
+CodeBuild : CodeCommit /Github
