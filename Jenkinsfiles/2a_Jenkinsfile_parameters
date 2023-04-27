@@ -1,5 +1,6 @@
 /*
 Jenkins parameters example to define the different parameter types in pipeline and use it in subsequent steps.
+I need to check why sh is not writtern in front of echo command and how it is working
 */
 pipeline {
     agent any
