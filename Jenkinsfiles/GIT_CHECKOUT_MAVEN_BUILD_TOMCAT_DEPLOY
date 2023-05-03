@@ -15,14 +15,16 @@ pipeline {
 						 sh "ls -lat"
 				  }
 				}
-			}
-			
-		stage('Build'){
+				
+				stage('Build'){
 		
 				steps {
 					sh "mvn clean install -f JENKINS-TOMCAT-PROJECT/java-tomcat-sample/pom.xml"
 				}
 			} 
+			}
+			
+		
 
 			
 		}
